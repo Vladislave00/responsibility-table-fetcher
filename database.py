@@ -7,26 +7,23 @@ load_dotenv()
 
 class Database:
 
-    # Все данные для отображения метрик в таблице
-    # section_id для определения под какую секцую записывать метрику
-    selectMetricsSQL = """SELECT metric_number, 
-                       metric_subnumber, 
-                       md.description, 
-                       unit_of_measurement, 
-                       base_level, 
-                       average_level, 
-                       goal_level, 
-                       measurement_frequency, 
-                       conditions, 
-                       notes, 
-                       points, 
-                       section_id 
-                       FROM metric_descriptions AS md 
-                       JOIN sections AS s ON md.section_id = s.id 
-                       ORDER BY 1, 2"""
-
-    # Данные для формирования секций таблицы
-    selectSectionsSQL = """SELECT id, description FROM sections;"""
+    # Все данные для отображения
+    select = """
+    SELECT 
+    a.type AS activity_type, 
+    r.number, 
+    r.letter, 
+    r.indicator, 
+    e.name AS employee_name, 
+    e.post AS employee_post
+    FROM 
+    Responsibilities r
+    LEFT JOIN 
+    Activities a ON r.activity_id = a.id
+    LEFT JOIN 
+    Employee_responsibility er ON r.id = er.responsibility_id
+    LEFT JOIN 
+    Employees e ON er.employee_id = e.id;"""
 
     # Логика подключения к БД
     _connection = None
