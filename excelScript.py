@@ -41,7 +41,7 @@ def set_border(ws, cell_range, need_to_thick, need_to_thick_up, need_to_thick_do
 # Метод для формирования Excel таблицы
 def make_excel():
     # Получаем метрики из базы данных
-    data = database.Database.get_metrics()
+    data = database.Database.get_data()
     # Создаем книгу и заполняем ее
     wb = openpyxl.Workbook()
 
@@ -56,7 +56,6 @@ def make_excel():
     header_data = ["Тип активности", "Активность" "Номер", "Буква", "Индикатор", "Имя сотрудника", "Должность"]
     ws.append(header_data)
 
-    data = database.Database.get_data()
 
     # Заполнение строк данными из базы данных
     for row in data:
