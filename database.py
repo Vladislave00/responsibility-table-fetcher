@@ -54,18 +54,10 @@ class Database:
 
     # Метод получения метрик
     @classmethod
-    def get_metrics(cls):
+    def get_data(cls):
         with Database.get_connection() as connection:
             with connection.cursor() as cursor:
-                cursor.execute(cls.selectMetricsSQL)
+                cursor.execute(cls.select)
                 results = cursor.fetchall()
                 return results
 
-    # Метод подключения групп
-    @classmethod
-    def get_sections(cls):
-        with Database.get_connection() as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(cls.selectSectionsSQL)
-                results = cursor.fetchall()
-                return results
