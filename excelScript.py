@@ -53,7 +53,7 @@ def make_excel():
     ws = wb.active
 
     # формирование шапки таблицы
-    header_data = ["Тип активности", "Активность" "Номер", "Буква", "Индикатор", "Имя сотрудника", "Должность"]
+    header_data = ["Активность" "Номер", "Буква", "Индикатор", "Имя сотрудника", "Должность"]
     ws.append(header_data)
 
 
@@ -62,13 +62,12 @@ def make_excel():
         ws.append(row)
 
     # Выставление ширины колонок
-    ws.column_dimensions['A'].width = 20
+    ws.column_dimensions['A'].width = 40
     ws.column_dimensions['B'].width = 40
     ws.column_dimensions['C'].width = 10
     ws.column_dimensions['D'].width = 10
     ws.column_dimensions['E'].width = 40
     ws.column_dimensions['F'].width = 20
-    ws.column_dimensions['G'].width = 20
 
     # Сохранение файла
     wb.save('Зоны ответственности.xlsx')
