@@ -10,7 +10,6 @@ class Database:
     # Все данные для отображения
     select = """
     SELECT 
-    a.type AS activity_type, 
     a.name AS activity_name,
     r.number, 
     r.letter, 
