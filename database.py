@@ -11,6 +11,7 @@ class Database:
     select = """
     SELECT 
     a.name AS activity_name,
+    a.subname,
     r.number, 
     r.letter, 
     r.indicator, 
@@ -23,8 +24,8 @@ class Database:
     LEFT JOIN 
     Employee_responsibility er ON r.id = er.responsibility_id
     LEFT JOIN 
-    Employees e ON er.employee_id = e.id
-    ORDER BY 1, 2, 3, 4;"""
+    Employees_for_activities e ON er.employee_id = e.id
+    ORDER BY 3,4;"""
 
     # Логика подключения к БД
     _connection = None
