@@ -1,6 +1,6 @@
 import openpyxl
 import openpyxl.styles
-import database
+import dbalch
 
 
 # Метод для форматирования границ таблицы
@@ -41,7 +41,7 @@ def set_border(ws, cell_range, need_to_thick, need_to_thick_up, need_to_thick_do
 # Метод для формирования Excel таблицы
 def make_excel():
     # Получаем метрики из базы данных
-    data = database.Database.get_data()
+    data = dbalch.Database.get_data()
     # Создаем книгу и заполняем ее
     wb = openpyxl.Workbook()
 
@@ -53,13 +53,14 @@ def make_excel():
     ws = wb.active
 
     # формирование шапки таблицы
-    header_data = ["Активность" "Номер", "Буква", "Индикатор", "Имя сотрудника", "Должность"]
+    header_data = ["Активность", "Подназвание активности", "Номер", "Буква", "Индикатор", "Имя сотрудника", "Должность"]
     ws.append(header_data)
 
 
     # Заполнение строк данными из базы данных
     for row in data:
-        ws.append(row)
+        # Convert the Row object to a list
+        ws.append([row.activity_name, row.subname, row.number, row.letter, row.indicator, row.employee_name, row.employee_post])
 
     # Выставление ширины колонок
     ws.column_dimensions['A'].width = 40
@@ -68,6 +69,7 @@ def make_excel():
     ws.column_dimensions['D'].width = 10
     ws.column_dimensions['E'].width = 40
     ws.column_dimensions['F'].width = 20
+    ws.column_dimensions['G'].width = 20
 
     # Сохранение файла
     wb.save('Зоны ответственности.xlsx')
