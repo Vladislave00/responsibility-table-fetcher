@@ -80,6 +80,7 @@ class Database:
         session = cls.get_session()  # Create a session instance
         try:
             results = session.query(
+                Activities.id,
                 Activities.name.label('activity_name'),
                 Activities.subname,
                 Responsibilities.number,
@@ -99,10 +100,10 @@ class Database:
         finally:
             session.close()  # Ensure the session is closed
 
-if __name__ == "__main__":
-    db = Database()
-    db.list_tables()  # List tables after connecting
-    Base.metadata.create_all(db.get_engine())  # Create tables if necessary
-    data = db.get_data()
-    for row in data:
-        print(row)
+# if __name__ == "__main__":
+#     db = Database()
+#     db.list_tables()  # List tables after connecting
+#     Base.metadata.create_all(db.get_engine())  # Create tables if necessary
+#     data = db.get_data()
+#     for row in data:
+#         print(row)
